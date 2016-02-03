@@ -81,11 +81,15 @@ cost_y0 = -1 * sum((one - Y) .* log(one - O), 2) / m;
 % Take the sum of all rows for the total cost (xi: i = 1,2,3..)
 J = sum(cost_y1 + cost_y0);
 
-t1_square=Theta1(:, 2:end).^2;
-t2_square=Theta2(:, 2:end).^2;
-reg_theta1= sum(t1_square(:)) * lambda / (2 * m);
-reg_theta2= sum(t2_square(:)) * lambda / (2 * m);
-J = J + ( reg_theta1 + reg_theta2 )
+%------------------------------------------------------------------------
+% Regularize the cost.
+%------------------------------------------------------------------------
+Theta2_square = Theta2(:, 2:end).^2;
+Theta2_reg = sum(Theta2_square(:)) * lambda / (2 * m);
+Theta1_square=Theta1(:, 2:end).^2;
+Theta1_reg = sum(Theta1_square(:)) * lambda / (2 * m);
+
+J = J + (Theta2_reg + Theta1_reg)
 
 % ====================== YOUR CODE HERE ======================
 % Part 2: Implement the backpropagation algorithm to compute the gradients
