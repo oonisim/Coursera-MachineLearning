@@ -21,7 +21,19 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for x_idx = 1:size(X,1)
+    x = X(x_idx, :);
+    centroid_idx = 1;
+    distance = sqrt(sum((x - centroids(centroid_idx, :)).^2));
+    for i = 2:K
+        d = sqrt(sum((x - centroids(i, :)).^2));
+        if d < distance
+            distance = d;
+            centroid_idx = i;
+        end
+    end
+    idx(x_idx) = centroid_idx;
+end
 
 
 
