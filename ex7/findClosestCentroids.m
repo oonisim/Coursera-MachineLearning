@@ -22,9 +22,17 @@ idx = zeros(size(X,1), 1);
 %
 
 for x_idx = 1:size(X,1)
+    %----------------------------------------------------------------------
+    % Distance form X(i) to centroid(k: k = 1)
+    %----------------------------------------------------------------------
     x = X(x_idx, :);
     centroid_idx = 1;
     distance = sqrt(sum((x - centroids(centroid_idx, :)).^2));
+
+    %----------------------------------------------------------------------
+    % If the distance form X(i) to centroid(k: k > 1) is larger,
+    % centroid(k) is closer to X(i). 
+    %----------------------------------------------------------------------
     for i = 2:K
         d = sqrt(sum((x - centroids(i, :)).^2));
         if d < distance

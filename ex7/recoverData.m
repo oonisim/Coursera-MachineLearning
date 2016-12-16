@@ -21,7 +21,17 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %               Notice that U(j, 1:K) is a row vector.
 %               
 
-X_rec = Z * ;
+%----------------------------------------------------------------------
+% [Data Set X]           : Row is a measurement. Column is a feature.
+% [Eigen Vector Matrix U]: Each column is an eigen vector. 
+% UK : Primary K components of U is U(:, 1:K)
+% UKT: Transpose of UK
+%----------------------------------------------------------------------
+% Projection from X data space to primary eigen vector space Z is X * UK.
+% Projection from primary eigen vector space Z back to X is Z * UKT.
+%----------------------------------------------------------------------
+UKT = transpose(U(:, 1:K));
+X_rec = Z * UKT;
 
 % =============================================================
 

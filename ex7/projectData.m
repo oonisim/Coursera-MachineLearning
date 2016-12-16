@@ -18,9 +18,20 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
-for i = 1:size(X, 1)
-    Z(i, :) = X(i, :) * U(:, 1:K); 
-end
+% Backup on 16 DEC 2016
+%for i = 1:size(X, 1)
+%    Z(i, :) = X(i, :) * U(:, 1:K); 
+%end
+
+%----------------------------------------------------------------------
+% [Data Set X]           : Row is a measurement. Column is a feature.
+% [Eigen Vector Matrix U]: Each column is an eigen vector. 
+% UK: Primary K components of U is U(:, 1:K)
+%----------------------------------------------------------------------
+% Projection from X data space to primary eigen vector space Z is X * UK.
+%----------------------------------------------------------------------
+UK = U(:, 1:K);
+Z = X * UK;
 
 % =============================================================
 
