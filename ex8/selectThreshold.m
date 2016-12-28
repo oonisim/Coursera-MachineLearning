@@ -10,9 +10,9 @@ bestEpsilon = 0;
 bestF1 = 0;
 F1 = 0;
 
+f = zeros(1000, 1);
 stepsize = (max(pval) - min(pval)) / 1000;
-for epsilon = min(pval):stepsize:max(pval)
-    
+for epsilon = min(pval):stepsize:max(pval)    
     % ====================== YOUR CODE HERE ======================
     % Instructions: Compute the F1 score of choosing epsilon as the
     %               threshold and place the value in F1. The code at the
@@ -23,18 +23,17 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
+    p = yval(find(pval <= epsilon));
+    tp = length(p(p == 1));
+    fp = length(p(p == 0));
 
+    n = yval(find(pval > epsilon));
+    fn = length(n(n == 1));
 
-
-
-
-
-
-
-
-
-
-
+    precision = tp / (tp + fp);
+    recall    = tp / (tp + fn);
+    F1 = (2 * precision * recall) / (precision + recall);
+    
     % =============================================================
 
     if F1 > bestF1
