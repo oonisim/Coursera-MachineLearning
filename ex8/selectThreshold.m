@@ -22,12 +22,19 @@ for epsilon = min(pval):stepsize:max(pval)
     %               
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
+    % predictions = (pval < epsilon)
+    % (pval < epsilon) & (yval ==0) gives a binary vector of AND.
 
-    p = yval(find(pval <= epsilon));
+    %----------------------------------------------------------------------
+    % Get the indices of pval where the value is <= epsilon.
+    % Use the indices to extract the corresponding labels (yval).
+    % Then find the number of labels whose value is 1 or 0.
+    %----------------------------------------------------------------------
+    p = yval(find(pval <= epsilon)); % positive predictions.
     tp = length(p(p == 1));
     fp = length(p(p == 0));
 
-    n = yval(find(pval > epsilon));
+    n = yval(find(pval > epsilon));  % negative predictions.
     fn = length(n(n == 1));
 
     precision = tp / (tp + fp);
