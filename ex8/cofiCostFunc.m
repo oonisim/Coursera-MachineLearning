@@ -53,6 +53,16 @@ J = sum(sum(Error .^ 2)) / 2;
 X_grad = Error * Theta;
 Theta_grad = Error' * X;
 
+%----------------------------------------------------------------------
+% Regularization
+%----------------------------------------------------------------------
+J_Reg_X =     (lambda / 2) * sum(sum((X .^2)));
+J_Reg_Theta = (lambda / 2) * sum(sum((Theta .^2)));
+J = J + J_Reg_X + J_Reg_Theta;
+
+X_grad = X_grad + (lambda * X);
+Theta_grad = Theta_grad + (lambda * Theta);
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
