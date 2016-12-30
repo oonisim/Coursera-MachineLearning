@@ -40,22 +40,18 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-JM = ((X * transpose(Theta) - Y) .* R) .^2
-J = sum(sum(JM)) / 2
+%----------------------------------------------------------------------
+% Read the following tutorials for errors or implementation notes:
+% https://www.coursera.org/learn/machine-learning/discussions/all/threads/YD0v9TL_EeWj5iIACwIAYw
+% https://www.coursera.org/learn/machine-learning/discussions/weeks/9/threads/92NKXCLBEeWM2iIAC0KUpw
+%----------------------------------------------------------------------
 
 
+Error = ((X * transpose(Theta) - Y) .* R);
+J = sum(sum(Error .^ 2)) / 2;
 
-
-
-
-
-
-
-
-
-
-
-
+X_grad = Error * Theta;
+Theta_grad = Error' * X;
 
 % =============================================================
 
